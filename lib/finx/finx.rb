@@ -5,7 +5,7 @@ require_relative 'payment'
 require_relative 'strong_customer_authentication'
 
 module FinX
-  FINX_API_HOST = 'finx-s.finleap.cloud'
+  FINX_API_HOST = 'api.figo.me'
 
   include FinX::Payment
   include FinX::StrongCustomerAuthentication
