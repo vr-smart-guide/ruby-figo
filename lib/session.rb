@@ -65,8 +65,8 @@ module Figo
       JSON.parse(response.body)
     end
 
-    def query_api_object(type, path, data = nil, method = 'GET', array_name = nil, host = API_ENDPOINT) # :nodoc:
-      response = query_api(path, data, method, host)
+    def query_api_object(type, path, data = nil, method = 'GET', array_name = nil) # :nodoc:
+      response = query_api(path, data, method)
       unless response.nil?
         if response.is_a? Hash
           return response[array_name].map { |entry| type.new(self, entry) } if array_name
