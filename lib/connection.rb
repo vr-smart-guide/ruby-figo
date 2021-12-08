@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'finx/finx'
 
 module Figo
   # Represents a non user-bound connection to the figo Connect API.
   # Its main purpose is to let user login via OAuth 2.0.
   class Connection
     include Figo
+    include FinX
     # Create connection object with client credentials.
     #
     # @param client_id [String] the client ID
@@ -40,6 +42,33 @@ module Figo
 
       # Evaluate HTTP response.
       response.body && !response.body.empty? ? JSON.parse(response.body) : nil
+    end
+
+    def query_api_json(path, data = nil, method = 'POST')
+      uri = URI("https://#{API_ENDPOINT}#{path}")
+      # Setup HTTP request.
+      request = method == 'POST' ? Net::HTTP::Post.new(path) : Net::HTTP::Get.new(path)
+      request.basic_auth(@client_id, @client_secret)
+      request['Accept'] = 'application/json'
+      request['Content-Type'] = 'application/json'
+      request['User-Agent'] = 'figo-ruby/1.4.2'
+
+      request.body = JSON.generate(data) unless data.nil?
+
+      # Send HTTP request.
+      response = @https.request(uri, request)
+
+      # Evaluate HTTP response.
+      return nil if response.nil? || response.body.nil? || response.body.empty?
+
+      JSON.parse(response.body)
+    end
+
+    def query_api_json_object(type, path, data = nil, method = 'GET') # :nodoc:
+      response = query_api_json path, data, method
+      return nil if response.nil?
+
+      type.new(self, response)
     end
 
     def query_api_object(type, path, data = nil, method = 'GET') # :nodoc:
