@@ -17,7 +17,7 @@ module Figo
            else
              "/rest/accounts/#{account_id}/payments?#{options}"
            end
-    query_api_object Model::Payment, path, nil, 'GET', 'payments'
+    query_api path, nil, 'GET'
   end
 
   # Retrieve specific payment.

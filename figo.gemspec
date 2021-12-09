@@ -2,9 +2,9 @@
 
 Gem::Specification.new do |s|
   s.name          = "figo"
-  s.version       = "2.0.13"
-  s.authors       = ["figo GmbH", "Netguru"]
-  s.email         = ['devs@figo.io', "lukasz.ozimek@netguru.com", "robert.kusmirek@netguru.com"]
+  s.version       = '2.0.15'
+  s.authors       = ['VR Smart Guide GmbH', "figo GmbH", "Netguru"]
+  s.email         = ['support@vr-smart-guide.de', 'devs@figo.io', "lukasz.ozimek@netguru.com", "robert.kusmirek@netguru.com"]
   s.homepage      = "https://github.com/figo-connect/ruby-figo"
   s.license       = "MIT"
   s.summary       = %q{API wrapper for figo Connect.}
