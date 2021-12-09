@@ -8,7 +8,7 @@ module FinX
     # @return [Object]
     def solve_finx_payment_challenge(payment_id, init_id, challenge_id, data)
       path = "/rest/payments/#{payment_id}/init/#{init_id}/challenges/#{challenge_id}/response"
-      query_api(path, data, 'POST')
+      query_api_json(path, data, 'POST')
     end
   end
 end
