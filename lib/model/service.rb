@@ -14,6 +14,9 @@ module Figo
       
       # @return [String] Bic of the financial service provider.
       attr_accessor :bic
+      
+      # @return [String] Bank Code of the financial service provider.
+      attr_accessor :bank_code
 
       # @return [Object]
       attr_accessor :icon
